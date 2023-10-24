@@ -1,11 +1,8 @@
 package dad.imc;
 
 import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -52,8 +49,10 @@ public class IMCApp extends Application {
 		pesoText.textProperty().bindBidirectional(peso, new NumberStringConverter());
 		alturaText.textProperty().bindBidirectional(altura, new NumberStringConverter());
 		
-		imcLabel.textProperty().bind(Bindings.concat("IMC: ").concat(peso.divide(altura.divide(100).multiply(altura.divide(100))).asString("%.2f")));
 		imc.bind(peso.divide(altura.divide(100).multiply(altura.divide(100))));
+		imcLabel.textProperty().bind(imc.asString("%.2f"));
+		
+		
 		
 		
 		// listeners
